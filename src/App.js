@@ -1,6 +1,8 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/Login";
 import Layout from "./components/Layout";
 import Dashboard from "./components/Dashboard";
@@ -9,6 +11,7 @@ import Employee from "./components/Employee";
 import Department from "./components/Department";
 import RequireAuth from "./components/RequireAuth";
 import { AuthProvider } from "./context/AuthProvider";
+import Register from "./components/Register";
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -24,8 +27,14 @@ function App() {
     setLoggedIn(true);
     sessionStorage.setItem("success", true);
   };
+
   return (
     <AuthProvider>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        closeButton={true}
+      />
       <BrowserRouter>
         <div className="wrapper" value={isLoggedIn}>
           <div
@@ -40,17 +49,19 @@ function App() {
               width={60}
             />
           </div>
+
           <Routes>
             <Route
               path="/"
               element={<Login onLoginSuccess={handleLoginSuccess} />}
             />
+            <Route path="/Register" element={<Register />} />
             <Route element={<RequireAuth />}>
-              <Route path="/layout" element={<Layout />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/employee" element={<Employee />} />
-              <Route path="/department" element={<Department />} />
+              <Route path="/Layout" element={<Layout />} />
+              <Route path="/Dashboard" element={<Dashboard />} />
+              <Route path="/Home" element={<Home />} />
+              <Route path="/Employee" element={<Employee />} />
+              <Route path="/Department" element={<Department />} />
             </Route>
           </Routes>
         </div>

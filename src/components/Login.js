@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
-import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = ({ onLoginSuccess }) => {
   const { setAuth } = useContext(AuthContext);
@@ -10,10 +10,9 @@ const Login = ({ onLoginSuccess }) => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const errRef = useRef();
-
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+  const [token, setToken] = useState(null);
 
   const [formData, setFormData] = useState({
     Email: "",
@@ -27,46 +26,42 @@ const Login = ({ onLoginSuccess }) => {
       ...prevFormData,
       [name]: value,
     }));
-    //console.log(formData);
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const res = await axios.post("/api/Employee/Login", formData);
-      console.log(res);
-  
+
       if (res.data.isSuccess) {
-        sessionStorage.setItem("Username", res.data.fullName);
-        sessionStorage.setItem("UserId", res.data.id);
-        setSuccess(true);
-        onLoginSuccess(true);
-        setAuth(true);
-        navigate("/Home", { replace: true });
-        
-        // Clear form data after successful login
         setFormData({
           Email: "",
           Password: "",
         });
+
+        sessionStorage.setItem("UserId", res.data.userId);
+        sessionStorage.setItem("Email", res.data.email);
+        sessionStorage.setItem("AuthToken", res.data.token);
+        setSuccess(true);
+        onLoginSuccess(true);
+        setAuth(true);
+        setToken(res.data.token);
+
+        navigate("/Employee", { replace: true });
       } else {
-        setErrMsg("Log in failed");
+        Swal.fire("Warning", "Log in failed.", "warning");
         setSuccess(false);
         onLoginSuccess(false);
       }
     } catch (error) {
       console.error("Login error:", error);
-      setErrMsg("Log in failed");
+      Swal.fire("Error", error.message, "info");
       setSuccess(false);
       onLoginSuccess(false);
     }
-  
-    errRef.current.focus();
   };
-  
-  
-  
+
   useEffect(() => {
     setErrMsg("");
   }, []);
@@ -117,13 +112,9 @@ const Login = ({ onLoginSuccess }) => {
                   />
                 </div>
               </form>
-              <p
-                ref={errRef}
-                className={errMsg ? "text-danger text-center" : "offscreen"}
-                aria-live="assertive"
-              >
-                {errMsg}
-              </p>
+              <div className="d-flex justify-content-end">
+                <a href="/Register">Register</a>
+              </div>
             </div>
           </div>
         </div>

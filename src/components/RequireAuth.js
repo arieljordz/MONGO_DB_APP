@@ -7,10 +7,10 @@ function RequireAuth() {
   const location = useLocation();
   const [userId, setUserId] = useState(sessionStorage.getItem("UserId"));
 
-  console.log(userId);
-  const _userId = userId == null ? 0 : userId;
+  // console.log(userId);
+  const _userId = userId == null ? "" : userId;
 
-  if (_userId !== 0) {
+  if (_userId !== "") {
     return <Outlet />;
   } else {
     return <Navigate to="/" state={{ from: location }} replace />;

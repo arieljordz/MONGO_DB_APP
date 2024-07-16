@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+body:not(.layout-fixed) .main-sidebar {
+  height: inherit !important;
+  min-height: 107% !important;
+  position: absolute !important;
+  top: 0 !important;
+}
+
+.dt-active{
+  background-color: #d6d6d6;
+}
+
