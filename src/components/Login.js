@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
@@ -7,8 +7,6 @@ import Swal from "sweetalert2";
 const Login = ({ onLoginSuccess }) => {
   const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
@@ -62,6 +60,10 @@ const Login = ({ onLoginSuccess }) => {
     }
   };
 
+  const handleRegister = (e) => {
+    navigate("/Register", { replace: true });
+  };
+
   useEffect(() => {
     setErrMsg("");
   }, []);
@@ -113,7 +115,7 @@ const Login = ({ onLoginSuccess }) => {
                 </div>
               </form>
               <div className="d-flex justify-content-end">
-                <a href="/Register">Register</a>
+                <a className="a-tag a-tag-bold" onClick={handleRegister}>Register</a>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/Login";
@@ -35,7 +35,7 @@ function App() {
         autoClose={2000}
         closeButton={true}
       />
-      <BrowserRouter>
+      <HashRouter>
         <div className="wrapper" value={isLoggedIn}>
           <div
             id="loader"
@@ -65,7 +65,7 @@ function App() {
             </Route>
           </Routes>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     </AuthProvider>
   );
 }

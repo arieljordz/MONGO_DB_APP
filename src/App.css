@@ -48,3 +48,12 @@ body:not(.layout-fixed) .main-sidebar {
   background-color: #d6d6d6;
 }
 
+.a-tag:hover {
+  cursor: pointer !important;
+  color: #085db9 !important;
+}
+
+.a-tag-bold {
+  font-weight: 470 !important;
+}
+
