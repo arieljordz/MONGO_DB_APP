@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/mongodb-app/static/css/main.0a772530.css",
-    "main.js": "/mongodb-app/static/js/main.b2fba8d6.js",
+    "main.js": "/mongodb-app/static/js/main.efc9df02.js",
     "static/js/453.e549c5a3.chunk.js": "/mongodb-app/static/js/453.e549c5a3.chunk.js",
     "index.html": "/mongodb-app/index.html",
     "main.0a772530.css.map": "/mongodb-app/static/css/main.0a772530.css.map",
-    "main.b2fba8d6.js.map": "/mongodb-app/static/js/main.b2fba8d6.js.map",
+    "main.efc9df02.js.map": "/mongodb-app/static/js/main.efc9df02.js.map",
     "453.e549c5a3.chunk.js.map": "/mongodb-app/static/js/453.e549c5a3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0a772530.css",
-    "static/js/main.b2fba8d6.js"
+    "static/js/main.efc9df02.js"
   ]
 }
