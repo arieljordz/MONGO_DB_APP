@@ -173,6 +173,7 @@ const Register = () => {
                         className="form-control"
                         name="Department"
                         onChange={handleChange}
+                        required="required"
                       >
                         <option value="">--Select--</option>
                         {departments.map((option) => (
